@@ -1,20 +1,19 @@
 import express, { Application, Request, Response } from 'express';
 import  { connect } from 'mongoose';
-import { getAllUsers, getUserById, addUser } from './handlers/User';
-
-
+import * as UserHandler from './handlers/User';
 
 const port: number = 8080;
 
 const app: Application = express();
 app.use(express.json());
 
-
 // Routes pour users
 
-app.get('/users/:id', getUserById);
-app.get('/users', getAllUsers );
-app.post('/users', addUser);
+app.get('/user/:id', UserHandler.getUserById);
+app.get('/user/list', UserHandler.getAllUsers);
+app.post('/user/new', UserHandler.addUser);
+app.get('/user/remove/:id', UserHandler.deleteUser);
+
 
 /**
  * /tasks -> addTask(post) -> getAlltask (get)
@@ -35,12 +34,9 @@ const dbConnect = async (): Promise<void> => {
     }
 }
 
-
 // start server
 app.listen(port, async () => {
     // database connection
     await dbConnect();
-    
     console.log('Server listening on port ', port);
-    
 });

@@ -32,4 +32,3 @@ exit
 ```Shell
 curl -X POST -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "johndoe@example.com"}' http://localhost:8080/users
 ```
-

@@ -3,7 +3,7 @@ import { Schema , Model , model } from "mongoose";
 interface IUser {
     email : string;
     name : string;
-}; 
+};
 
 const UserSchema  = new Schema<IUser>({
     email : {
