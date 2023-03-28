@@ -32,7 +32,6 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
     } catch (error) {
         res.status(500).json({error : error});
     }
-
 }
 
 /**
@@ -54,14 +53,28 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
 }
 
 /**
+ * Update User
+ */
+export const editUser = async (req: Request, res: Response): Promise<void> => {
+
+    const userId = req.params.id;
+    try {
+        await User.findByIdAndUpdate(userId, req.body);
+        res.json(userId + ' updated');
+    } catch (error) {
+        res.status(500).json({error : error});
+    }
+}
+
+/**
  * Delete User
  */
 export const deleteUser = async (req: Request, res: Response): Promise<void> => {
 
     const userId: String = req.params.id;
     try {
-        User.findOneAndDelete({id : userId})
-        res.json('compte supprime');
+        await User.findByIdAndDelete(userId)
+        res.json(userId + ' deleted');
     } catch (error) {
         res.status(500).json({error : error});
     }

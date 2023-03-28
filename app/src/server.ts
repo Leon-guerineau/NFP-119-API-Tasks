@@ -9,10 +9,11 @@ app.use(express.json());
 
 // Routes pour users
 
-app.get('/user/:id', UserHandler.getUserById);
-app.get('/user/list', UserHandler.getAllUsers);
-app.post('/user/new', UserHandler.addUser);
-app.get('/user/remove/:id', UserHandler.deleteUser);
+app.post('/user/new', UserHandler.addUser);         // C
+app.get('/user/:id', UserHandler.getUserById);      // R
+app.get('/user/list', UserHandler.getAllUsers);     // R all
+app.post('/user/edit/:id', UserHandler.editUser);   // U
+app.get('/user/delete/:id', UserHandler.deleteUser);// D
 
 
 /**
