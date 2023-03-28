@@ -28,10 +28,6 @@ app.put('/tasks/:id', TaskHandler.updateTask);          // Update
 app.delete('/tasks/:id', TaskHandler.deleteTask);       // Delete
 
 /**
- * /tasks -> addTask(post) -> getAlltask (get)
- */
-
-/**
  * Database Connection
  */
 const dbConnect = async (): Promise<void> => {
