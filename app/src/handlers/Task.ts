@@ -46,6 +46,7 @@ export const createTask = async (req: Request, res: Response): Promise<void> => 
     try {
         await task.save();
         res.json(task);
+        // res.redirect('/tasks');
     } catch (error) {
         res.status(500).json({error: error});
     }
