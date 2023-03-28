@@ -1,36 +1,38 @@
-# NFP119-Docker-Node
-Compo docker pour le cours de programmation fonctionnelle
+# NFP119-API-Tasks
+API REST de gestion de taches développer en express js pour le cours de programmation fonctionnelle
 
-- ### Lancer le container
+- ### Lancer les containers
 
-    ```Shell
-    docker-compose up -d
-    ```
+  ```Shell
+  docker-compose up -d
+  ```
 
-- ### Arrêter le container
+- ### Arrêter les containers
 
-    ```Shell
-    docker-compose down
-    ```
+  ```Shell
+  docker-compose down
+  ```
 
-- ### Ouvrir le container dans un terminal
+- ### Ouvrir le terminal du container node
 
-    ```Shell
-    docker exec -it nfp-119-api-tasks-node-1 sh
-    ```
+  ```Shell
+  docker exec -it nfp-119-api-tasks-node-1 sh
+  ```
 
 - ### Sortir du terminal
 
-    ###### Dans le terminal du container
-    ```Shell
-    exit
-    ```
+  - ###### Commande à exécuter dans le terminal du container node
+
+  ```Shell
+  exit
+  ```
 
 - ### Commandes curl pour simuler des requêtes sur l'API
 
   - #### Utilisateurs
 
-    ###### Dans le terminal du container
+    - ###### Commandes à exécuter dans le terminal du container node
+    - ###### {userId} à remplacer par des ids générés
         
     ```shell 
     # List All
@@ -47,7 +49,8 @@ Compo docker pour le cours de programmation fonctionnelle
 
   - #### Tâches
 
-    ###### Dans le terminal du container
+      - ###### Commandes à exécuter dans le terminal du container node
+      - ###### {userId} et {taskId} à remplacer par des ids générés
     
     ```shell
     # List All
