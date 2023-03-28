@@ -1,27 +1,34 @@
 import express, { Application, Request, Response } from 'express';
 import  { connect } from 'mongoose';
 import * as UserHandler from './handlers/User';
+import * as TaskHandler from './handlers/Task';
 
 const port: number = 8080;
 
 const app: Application = express();
 app.use(express.json());
 
-// Routes pour users
+// Routes pour Users
 
-app.post('/user/new', UserHandler.addUser);         // C
-app.get('/user/:id', UserHandler.getUserById);      // R
-app.get('/user/list', UserHandler.getAllUsers);     // R all
-app.post('/user/edit/:id', UserHandler.editUser);   // U
-app.get('/user/delete/:id', UserHandler.deleteUser);// D
+app.get('/users', UserHandler.getAllUsers);      // Read all
 
+app.post('/users', UserHandler.addUser);         // Create
+app.get('/users/:id', UserHandler.getUserById);  // Read
+app.put('/users/:id', UserHandler.editUser);     // Update
+app.delete('/users/:id', UserHandler.deleteUser);// Delete
+
+// Routes pour Tasks
+
+app.get('/tasks', TaskHandler.getAllTasks);      // Read all
+
+app.post('/tasks', TaskHandler.createTask);      // Create
+app.get('/tasks/:id', TaskHandler.readTask);     // Read
+app.put('/tasks/:id', TaskHandler.updateTask);   // Update
+app.delete('/tasks/:id', TaskHandler.deleteTask);// Delete
 
 /**
  * /tasks -> addTask(post) -> getAlltask (get)
- * /tasks/:id 
  * /users/:id/tasks
- * /tasks/:id -> delete
- * 
  */
 
 const dbConnect = async (): Promise<void> => {

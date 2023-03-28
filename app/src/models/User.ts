@@ -5,7 +5,7 @@ interface IUser {
     name : string;
 };
 
-const UserSchema  = new Schema<IUser>({
+const UserSchema = new Schema<IUser>({
     email : {
         type : String,
         unique : true,
