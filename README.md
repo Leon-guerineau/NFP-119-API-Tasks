@@ -52,6 +52,8 @@ Compo docker pour le cours de programmation fonctionnelle
     ```shell
     # List All
     curl -X GET -H "Content-Type: application/json" http://localhost:8080/tasks
+    # List by userId
+    curl -X GET -H "Content-Type: application/json" http://localhost:8080/users/{userId}/tasks
     # Create
     curl -X POST -H "Content-Type: application/json" -d '{"name": "task name", "detail": "example"}' http://localhost:8080/tasks
     # Read
