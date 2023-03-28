@@ -7,6 +7,14 @@ API REST de gestion de taches développer en express js pour le cours de program
   docker-compose up -d
   ```
 
+- ### Liens
+
+  - #### API
+    http://localhost:8080
+
+  - #### Mongo Express (pour visualiser la base de données)
+    http://localhost:8081
+
 - ### Arrêter les containers
 
   ```Shell
