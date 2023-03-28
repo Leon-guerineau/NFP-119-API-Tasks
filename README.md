@@ -27,6 +27,22 @@ API REST de gestion de taches développer en express js pour le cours de program
   docker exec -it nfp-119-api-tasks-node-1 sh
   ```
 
+- ### Installer les modules
+
+  - ###### Commande à exécuter dans le terminal du container node
+
+  ```Shell
+  npm i
+  ```
+
+- ### Lancer nodemon
+
+  - ###### Commande à exécuter dans le terminal du container node
+
+  ```Shell
+  npm start
+  ```
+
 - ### Sortir du terminal
 
   - ###### Commande à exécuter dans le terminal du container node
