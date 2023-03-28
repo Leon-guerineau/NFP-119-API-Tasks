@@ -1,35 +1,35 @@
-import { Schema , Model , model } from "mongoose";
+import {Schema, Model, model} from "mongoose";
 import {IUser} from "./User";
 
 interface ITask {
-    userId : string;
-    name : string;
-    detail : string;
-    finished : boolean;
-    createdAt : Date;
+    userId: string;
+    name: string;
+    detail: string;
+    finished: boolean;
+    createdAt: Date;
 };
 
 const TaskSchema = new Schema<ITask>({
-    userId : {
-        type : String
+    userId: {
+        type: String
     },
-    name : {
-        type : String,
-        required : true
+    name: {
+        type: String,
+        required: true
     },
-    detail : {
-        type : String
+    detail: {
+        type: String
     },
-    finished : {
-        type : Boolean,
-        default : false
+    finished: {
+        type: Boolean,
+        default: false
     },
-    createdAt : {
-        type : Date,
-        default : Date.now
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
-const Task : Model<ITask> = model('Task',TaskSchema);
+const Task: Model<ITask> = model('Task', TaskSchema);
 
 export {Task, ITask}

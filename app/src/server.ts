@@ -1,5 +1,5 @@
-import express, { Application, Request, Response } from 'express';
-import  { connect } from 'mongoose';
+import express, {Application} from 'express';
+import {connect} from 'mongoose';
 import * as UserHandler from './handlers/User';
 import * as TaskHandler from './handlers/Task';
 
@@ -10,27 +10,30 @@ app.use(express.json());
 
 // Routes pour Users
 
-app.get('/users', UserHandler.getAllUsers);      // Read all
+app.get('/users', UserHandler.getAllUsers);         // List all
 
-app.post('/users', UserHandler.addUser);         // Create
-app.get('/users/:id', UserHandler.getUserById);  // Read
-app.put('/users/:id', UserHandler.editUser);     // Update
-app.delete('/users/:id', UserHandler.deleteUser);// Delete
+app.post('/users', UserHandler.createUser);         // Create
+app.get('/users/:id', UserHandler.readUser);        // Read
+app.put('/users/:id', UserHandler.updateUser);      // Update
+app.delete('/users/:id', UserHandler.deleteUser);   // Delete
 
 // Routes pour Tasks
 
-app.get('/tasks', TaskHandler.getAllTasks);      // Read all
+app.get('/tasks', TaskHandler.getAllTasks);             // List all
+app.get('/users/:id/tasks', TaskHandler.getUserTasks);  // List by userId
 
-app.post('/tasks', TaskHandler.createTask);      // Create
-app.get('/tasks/:id', TaskHandler.readTask);     // Read
-app.put('/tasks/:id', TaskHandler.updateTask);   // Update
-app.delete('/tasks/:id', TaskHandler.deleteTask);// Delete
+app.post('/tasks', TaskHandler.createTask);             // Create
+app.get('/tasks/:id', TaskHandler.readTask);            // Read
+app.put('/tasks/:id', TaskHandler.updateTask);          // Update
+app.delete('/tasks/:id', TaskHandler.deleteTask);       // Delete
 
 /**
  * /tasks -> addTask(post) -> getAlltask (get)
- * /users/:id/tasks
  */
 
+/**
+ * Database Connection
+ */
 const dbConnect = async (): Promise<void> => {
 
     const uri: string = "mongodb://root:mdproot@mongo:27017/";
@@ -42,9 +45,10 @@ const dbConnect = async (): Promise<void> => {
     }
 }
 
-// start server
+/**
+ * Start Server
+ */
 app.listen(port, async () => {
-    // database connection
     await dbConnect();
     console.log('Server listening on port ', port);
 });

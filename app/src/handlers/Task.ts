@@ -1,14 +1,13 @@
-import { Request, Response } from "express";
-import { Task, ITask } from "../models/Task";
-import {User} from "../models/User";
+import {Request, Response} from "express";
+import {Task, ITask} from "../models/Task";
 
 /**
- * Read All Tasks
+ * List All Tasks
  */
 export const getAllTasks = async (req: Request, res: Response): Promise<void> => {
 
     try {
-        const tasks:ITask[] = await Task.find();
+        const tasks: ITask[] = await Task.find();
         tasks ? res.json(tasks) : res.status(404).send({
             error: {
                 code: 404,
@@ -16,7 +15,25 @@ export const getAllTasks = async (req: Request, res: Response): Promise<void> =>
             }
         });
     } catch (error) {
-        res.status(500).json({error : error});
+        res.status(500).json({error: error});
+    }
+}
+
+/**
+ * List Tasks by userId
+ */
+export const getUserTasks = async (req: Request, res: Response): Promise<void> => {
+    const userId: String = req.params.id;
+    try {
+        const tasks: ITask[] = await Task.find({userId: userId});
+        tasks ? res.json(tasks) : res.status(404).send({
+            error: {
+                code: 404,
+                message: "Not found"
+            }
+        });
+    } catch (error) {
+        res.status(500).json({error: error});
     }
 }
 
@@ -30,7 +47,7 @@ export const createTask = async (req: Request, res: Response): Promise<void> => 
         await task.save();
         res.json(task);
     } catch (error) {
-        res.status(500).json({error : error});
+        res.status(500).json({error: error});
     }
 }
 
@@ -49,7 +66,7 @@ export const readTask = async (req: Request, res: Response): Promise<void> => {
             }
         });
     } catch (error) {
-        res.status(500).json({error : error});
+        res.status(500).json({error: error});
     }
 }
 
@@ -63,7 +80,7 @@ export const updateTask = async (req: Request, res: Response): Promise<void> => 
         await Task.findByIdAndUpdate(taskId, req.body);
         res.json(taskId + ' updated');
     } catch (error) {
-        res.status(500).json({error : error});
+        res.status(500).json({error: error});
     }
 }
 
@@ -77,6 +94,6 @@ export const deleteTask = async (req: Request, res: Response): Promise<void> => 
         await Task.findByIdAndDelete(taskId)
         res.json(taskId + ' deleted');
     } catch (error) {
-        res.status(500).json({error : error});
+        res.status(500).json({error: error});
     }
 }
