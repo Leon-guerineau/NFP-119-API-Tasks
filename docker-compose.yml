@@ -3,17 +3,17 @@ version: '3'
 services:
 
   node:
+    container_name: NFP-119-API-Tasks-node
     build: .
     working_dir: /usr/src/app
-    # Commande pour garder le container occuper pour qu'il reste ouvert
-    # La commande peut etre remplacee par nodemon s'il est mis en place
-    command: tail -f /dev/null
+    command: npm start
     ports:
       - '8080:8080'
     volumes:
       - ./app:/usr/src/app
 
   mongo:
+    container_name: NFP-119-API-Tasks-mongo
     image: mongo
     restart: always
     environment:
@@ -21,6 +21,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mdproot
 
   mongo-express:
+    container_name: NFP-119-API-Tasks-mongo-express
     image: mongo-express
     restart: always
     ports:

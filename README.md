@@ -3,6 +3,8 @@ API REST de gestion de taches développer en express js pour le cours de program
 
 - ### Lancer les containers
 
+  - ###### Lance automatiquement la commande *npm start* dans le container
+
   ```Shell
   docker-compose up -d
   ```
@@ -24,7 +26,7 @@ API REST de gestion de taches développer en express js pour le cours de program
 - ### Ouvrir le terminal du container node
 
   ```Shell
-  docker exec -it nfp-119-api-tasks-node-1 sh
+  docker exec -it NFP-119-API-Tasks-node sh
   ```
 
 - ### Installer les modules
@@ -33,14 +35,6 @@ API REST de gestion de taches développer en express js pour le cours de program
 
   ```Shell
   npm i
-  ```
-
-- ### Lancer nodemon
-
-  - ###### Commande à exécuter dans le terminal du container node
-
-  ```Shell
-  npm start
   ```
 
 - ### Sortir du terminal
