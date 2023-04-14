@@ -1,5 +1,5 @@
 # NFP119-API-Tasks
-API REST de gestion de taches développer en express js pour le cours de programmation fonctionnelle
+API RESTful de gestion de tâches développer en express js pour le cours de programmation fonctionnelle
 
 - ### Lancer les containers
 
