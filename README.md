@@ -29,14 +29,6 @@ API REST de gestion de taches développer en express js pour le cours de program
   docker exec -it NFP-119-API-Tasks-node sh
   ```
 
-- ### Installer les modules
-
-  - ###### Commande à exécuter dans le terminal du container node
-
-  ```Shell
-  npm i
-  ```
-
 - ### Sortir du terminal
 
   - ###### Commande à exécuter dans le terminal du container node
@@ -62,7 +54,7 @@ API REST de gestion de taches développer en express js pour le cours de program
     # Update
     curl -X PUT -H "Content-Type: application/json" -d '{"name": "John Dont", "email": "johndont@example.com"}' http://localhost:8080/users/{userId}
     # Delete
-    curl -X DELLETE-H "Content-Type: application/json" http://localhost:8080/users/{userId}
+    curl -X DELETE -H "Content-Type: application/json" http://localhost:8080/users/{userId}
     ```
 
   - #### Tâches

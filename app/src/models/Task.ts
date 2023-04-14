@@ -1,5 +1,4 @@
 import {Schema, Model, model} from "mongoose";
-import {IUser} from "./User";
 
 interface ITask {
     userId: string;

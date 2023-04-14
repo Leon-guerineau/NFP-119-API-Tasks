@@ -10,22 +10,22 @@ app.use(express.json());
 
 // Routes pour Users
 
-app.get('/users', UserHandler.getAllUsers);         // List all
+app.get('/users', UserHandler.getAllUsers);              // List all
 
 app.post('/users', UserHandler.createUser);         // Create
-app.get('/users/:id', UserHandler.readUser);        // Read
+app.get('/users/:id', UserHandler.readUser);             // Read
 app.put('/users/:id', UserHandler.updateUser);      // Update
 app.delete('/users/:id', UserHandler.deleteUser);   // Delete
 
 // Routes pour Tasks
 
-app.get('/tasks', TaskHandler.getAllTasks);             // List all
-app.get('/users/:id/tasks', TaskHandler.getUserTasks);  // List by userId
+app.get('/tasks', TaskHandler.getAllTasks);              // List all
+app.get('/users/:id/tasks', TaskHandler.getUserTasks);   // List by userId
 
-app.post('/tasks', TaskHandler.createTask);             // Create
-app.get('/tasks/:id', TaskHandler.readTask);            // Read
-app.put('/tasks/:id', TaskHandler.updateTask);          // Update
-app.delete('/tasks/:id', TaskHandler.deleteTask);       // Delete
+app.post('/tasks', TaskHandler.createTask);         // Create
+app.get('/tasks/:id', TaskHandler.readTask);             // Read
+app.put('/tasks/:id', TaskHandler.updateTask);      // Update
+app.delete('/tasks/:id', TaskHandler.deleteTask);   // Delete
 
 /**
  * Database Connection
@@ -34,7 +34,7 @@ const dbConnect = async (): Promise<void> => {
 
     const uri: string = "mongodb://root:mdproot@mongo:27017/";
     try {
-        const cnx = await connect(uri);
+        await connect(uri);
         console.log('mongo connecté ');
     } catch (error) {
         console.log(error);
