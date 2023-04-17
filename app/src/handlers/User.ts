@@ -4,7 +4,7 @@ import {User, IUser} from "../models/User";
 /**
  * List All Users
  */
-export async function getAllUsers(req: Request, res: Response): Promise<void>
+export async function listAllUsers(req: Request, res: Response): Promise<void>
 {
     // Try-catch de la récupération des utilisateurs
     try {
@@ -88,6 +88,8 @@ export async function deleteUser(req: Request, res: Response): Promise<void>
     try {
         // Suppression de l'utilisateur
         await User.findByIdAndDelete(userId);
+        // Retour
+        res.status(200);
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error

@@ -4,25 +4,24 @@ import {Task, ITask} from "../models/Task";
 /**
  * List All Tasks
  */
-export const getAllTasks = async (req: Request, res: Response): Promise<void> => {
-
+export async function listAllTasks(req: Request, res: Response): Promise<void>
+{
+    // Try-catch de la récupération des tâches
     try {
+        // Recherche des tâches
         const tasks: ITask[] = await Task.find();
-        tasks ? res.json(tasks) : res.status(404).send({
-            error: {
-                code: 404,
-                message: "Not found"
-            }
-        });
+        // Retour de la liste
+        res.status(200).json(tasks);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }
 
 /**
  * List Tasks by userId
  */
-export const getUserTasks = async (req: Request, res: Response): Promise<void> => {
+export const listUserTasks = async (req: Request, res: Response): Promise<void> => {
     const userId: String = req.params.id;
     try {
         const tasks: ITask[] = await Task.find({userId: userId});
