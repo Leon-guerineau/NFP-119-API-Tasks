@@ -2,80 +2,94 @@ import {Request, Response} from "express";
 import {User, IUser} from "../models/User";
 
 /**
- * Read All Users
+ * List All Users
  */
-export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
-
+export async function getAllUsers(req: Request, res: Response): Promise<void>
+{
+    // Try-catch de la récupération des utilisateurs
     try {
+        // Recherche des utilisateurs
         const users: IUser[] = await User.find();
-        users ? res.json(users) : res.status(404).send({
-            error: {
-                code: 404,
-                message: "Not found"
-            }
-        });
+        // Retour de la liste
+        res.json(users);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json({error: error}); // TODO : error
     }
 }
 
 /**
  * Create User
  */
-export const createUser = async (req: Request, res: Response): Promise<void> => {
-
+export async function createUser(req: Request, res: Response): Promise<void>
+{
+    // Création du nouvel utilisateur
     const user = new User(req.body);
     try {
+        // Sauvegarde du nouvel utilisateur
         await user.save();
+        // Retour de l'utilisateur
         res.json(user);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json({error: error}); // TODO : error
     }
 }
 
 /**
  * Read User
  */
-export const readUser = async (req: Request, res: Response): Promise<void> => {
+export async function readUser(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant utilisateur
+    const userId: string = req.params.userId;
 
-    const id = req.params.id;
+    // Try-catch de la récupération de l'utilisateur
     try {
-        const user = await User.findById(id);
-        user ? res.json(user) : res.status(404).send({
-            error: {
-                code: 404,
-                message: "Not found"
-            }
-        });
+        // Récupération de l'utilisateur
+        const user = await User.findById(userId);
+        // Retour de l'utilisateur
+        res.json(user);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json({error: error}); // TODO : error
     }
 }
 
 /**
  * Update User
  */
-export const updateUser = async (req: Request, res: Response): Promise<void> => {
+export async function updateUser(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant utilisateur
+    const userId: string = req.params.userId;
 
-    const userId = req.params.id;
+    // Try-catch de la modification
     try {
+        // Récupération de l'utilisateur
         await User.findByIdAndUpdate(userId, req.body);
-        res.json(userId + ' updated');
+        // Retour de l'utilisateur
+        res.json(await User.findById(userId));
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json({error: error}); // TODO : error
     }
 }
 
 /**
  * Delete User
  */
-export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+export async function deleteUser(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant utilisateur
+    const userId: String = req.params.userId;
 
-    const userId: String = req.params.id;
+    // Try-catch de la suppression
     try {
-        await User.findByIdAndDelete(userId)
-        res.json(userId + ' deleted');
+        // Suppression de l'utilisateur
+        await User.findByIdAndDelete(userId);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json({error: error}); // TODO : error
     }
 }

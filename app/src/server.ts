@@ -4,40 +4,48 @@ import * as UserHandler from './handlers/User';
 import * as TaskHandler from './handlers/Task';
 import cors from 'cors';
 
-const port: number = 8080;
+const port: number = 8080; // TODO const environment
 
 const app: Application = express();
+
+// Mise en place d'express
 app.use(express.json());
+
+// Mise en place du middleware pour externaliser l'accès à l'API
 app.use(cors());
 
-// Routes pour Users
+/**
+ * Routes pour Users
+ */
 
-app.get('/users', UserHandler.getAllUsers);              // List all
+app.get('/users', UserHandler.getAllUsers);             // List all
 
-app.post('/users', UserHandler.createUser);         // Create
-app.get('/users/:id', UserHandler.readUser);             // Read
-app.put('/users/:id', UserHandler.updateUser);      // Update
-app.delete('/users/:id', UserHandler.deleteUser);   // Delete
+app.post('/users', UserHandler.createUser);             // Create
+app.get('/users/:userId', UserHandler.readUser);        // Read
+app.put('/users/:userId', UserHandler.updateUser);      // Update
+app.delete('/users/:userId', UserHandler.deleteUser);   // Delete
 
-// Routes pour Tasks
+/**
+ * Routes pour Tasks
+ */
 
-app.get('/tasks', TaskHandler.getAllTasks);              // List all
-app.get('/users/:id/tasks', TaskHandler.getUserTasks);   // List by userId
+app.get('/tasks', TaskHandler.getAllTasks);                 // List all
+app.get('/users/:userId/tasks', TaskHandler.getUserTasks);  // List by userId
 
-app.post('/tasks', TaskHandler.createTask);         // Create
-app.get('/tasks/:id', TaskHandler.readTask);             // Read
-app.put('/tasks/:id', TaskHandler.updateTask);      // Update
-app.delete('/tasks/:id', TaskHandler.deleteTask);   // Delete
+app.post('/tasks', TaskHandler.createTask);                 // Create
+app.get('/tasks/:taskId', TaskHandler.readTask);            // Read
+app.put('/tasks/:taskId', TaskHandler.updateTask);          // Update
+app.delete('/tasks/:taskId', TaskHandler.deleteTask);       // Delete
 
 /**
  * Database Connection
  */
-const dbConnect = async (): Promise<void> => {
-
-    const uri: string = "mongodb://root:mdproot@mongo:27017/";
+async function dbConnect(): Promise<void>
+{
+    const uri: string = 'mongodb://root:mdproot@mongo:27017/'; // TODO : const environment
     try {
         await connect(uri);
-        console.log('mongo connecté ');
+        console.log('mongo connecté');
     } catch (error) {
         console.log(error);
     }
@@ -48,5 +56,5 @@ const dbConnect = async (): Promise<void> => {
  */
 app.listen(port, async () => {
     await dbConnect();
-    console.log('Server listening on port ', port);
+    console.log('Server listening on port : ', port);
 });
