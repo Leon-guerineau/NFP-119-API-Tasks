@@ -21,78 +21,99 @@ export async function listAllTasks(req: Request, res: Response): Promise<void>
 /**
  * List Tasks by userId
  */
-export const listUserTasks = async (req: Request, res: Response): Promise<void> => {
-    const userId: String = req.params.id;
+export async function listUserTasks(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant utilisateur
+    const userId: string = req.params.userId;
+
+    // Try-catch de la récupération des tâches
     try {
+        // Récupération des tâches
         const tasks: ITask[] = await Task.find({userId: userId});
-        tasks ? res.json(tasks) : res.status(404).send({
-            error: {
-                code: 404,
-                message: "Not found"
-            }
-        });
+        // Retour de la liste
+        res.status(200).json(tasks);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }
 
 /**
  * Create Task
  */
-export const createTask = async (req: Request, res: Response): Promise<void> => {
-
+export async function createTask(req: Request, res: Response): Promise<void>
+{
+    // Création de la nouvelle tâche
     const task = new Task(req.body);
+
+    // Try-catch de la sauvegarde de la tâche
     try {
+        // Sauvegarde de la tâche
         await task.save();
-        res.json(task);
+        // Retour de la tâche
+        res.status(200).json(task);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }
 
 /**
  * Read User
  */
-export const readTask = async (req: Request, res: Response): Promise<void> => {
+export async function readTask(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant de la tâche
+    const taskId: string = req.params.taskId;
 
-    const taskId = req.params.id;
+    // Try-catch de la récupération de la tâche
     try {
+        // Récupération de la tâche
         const task = await Task.findById(taskId);
-        task ? res.json(task) : res.status(404).send({
-            error: {
-                code: 404,
-                message: "Task not found"
-            }
-        });
+        // Retour de la tâche
+        res.status(200).json(task);
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }
 
 /**
  * Update Task
  */
-export const updateTask = async (req: Request, res: Response): Promise<void> => {
+export async function updateTask(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant de la tâche
+    const taskId: string = req.params.taskId;
 
-    const taskId = req.params.id;
+    // Try-catch de la modification
     try {
-        await Task.findByIdAndUpdate(taskId, req.body);
-        res.json(taskId + ' updated');
+        // Modification de la tâche
+        await Task.findByIdAndUpdate(taskId);
+        // Retour de la tâche
+        res.status(200).json(await Task.findById(taskId));
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }
 
 /**
  * Delete Task
  */
-export const deleteTask = async (req: Request, res: Response): Promise<void> => {
+export async function deleteTask(req: Request, res: Response): Promise<void>
+{
+    // Récupération de l'identifiant de la tâche
+    const taskId: string = req.params.taskId;
 
-    const taskId = req.params.id;
+    // Try-catch de la suppression
     try {
-        await Task.findByIdAndDelete(taskId)
-        res.json(taskId + ' deleted');
+        // Suppression de la tâche
+        await Task.findByIdAndDelete(taskId);
+        // Retour
+        res.status(200); // TODO : retour delete
     } catch (error) {
-        res.status(500).json({error: error});
+        // Retour de l'erreur
+        res.status(500).json(error); // TODO : error
     }
 }

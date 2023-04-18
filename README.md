@@ -74,5 +74,6 @@ API RESTful de gestion de tâches développer en express js pour le cours de pro
     # Update
     curl -X PUT -H "Content-Type: application/json" -d '{"userId": "{userId}", "detail": "a more detailed example"}' http://localhost:8080/tasks/{taskId}
     # Delete
-    curl -X DELLETE -H "Content-Type: application/json" http://localhost:8080/tasks/{taskId}
+    curl -X DELETE -H "Content-Type: application/json" http://localhost:8080/tasks/{taskId}
     ```
+    643ef40388423d85dd70ae83

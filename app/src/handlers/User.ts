@@ -11,7 +11,7 @@ export async function listAllUsers(req: Request, res: Response): Promise<void>
         // Recherche des utilisateurs
         const users: IUser[] = await User.find();
         // Retour de la liste
-        res.json(users);
+        res.status(200).json(users);
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error
@@ -25,11 +25,13 @@ export async function createUser(req: Request, res: Response): Promise<void>
 {
     // Création du nouvel utilisateur
     const user = new User(req.body);
+
+    // Try-catch de la sauvegarde de l'utilisateur
     try {
         // Sauvegarde du nouvel utilisateur
         await user.save();
         // Retour de l'utilisateur
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error
@@ -49,7 +51,7 @@ export async function readUser(req: Request, res: Response): Promise<void>
         // Récupération de l'utilisateur
         const user = await User.findById(userId);
         // Retour de l'utilisateur
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error
@@ -66,10 +68,10 @@ export async function updateUser(req: Request, res: Response): Promise<void>
 
     // Try-catch de la modification
     try {
-        // Récupération de l'utilisateur
+        // Modification de l'utilisateur
         await User.findByIdAndUpdate(userId, req.body);
         // Retour de l'utilisateur
-        res.json(await User.findById(userId));
+        res.status(200).json(await User.findById(userId));
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error
@@ -82,14 +84,14 @@ export async function updateUser(req: Request, res: Response): Promise<void>
 export async function deleteUser(req: Request, res: Response): Promise<void>
 {
     // Récupération de l'identifiant utilisateur
-    const userId: String = req.params.userId;
+    const userId: string = req.params.userId;
 
     // Try-catch de la suppression
     try {
         // Suppression de l'utilisateur
         await User.findByIdAndDelete(userId);
         // Retour
-        res.status(200);
+        res.status(200); // TODO : retour delete
     } catch (error) {
         // Retour de l'erreur
         res.status(500).json({error: error}); // TODO : error

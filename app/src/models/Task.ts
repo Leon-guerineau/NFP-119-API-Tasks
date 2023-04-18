@@ -1,7 +1,7 @@
 import {Schema, Model, model} from "mongoose";
 
 interface ITask {
-    userId: string;
+    userId: string; // TODO : vrai liaison task/user
     name: string;
     detail: string;
     finished: boolean;
