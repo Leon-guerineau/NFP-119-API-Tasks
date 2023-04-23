@@ -14,7 +14,8 @@ export async function listAllTasks(req: Request, res: Response): Promise<void>
         res.status(200).json(tasks);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
@@ -34,7 +35,8 @@ export async function listUserTasks(req: Request, res: Response): Promise<void>
         res.status(200).json(tasks);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
@@ -54,7 +56,8 @@ export async function createTask(req: Request, res: Response): Promise<void>
         res.status(200).json(task);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
@@ -74,7 +77,8 @@ export async function readTask(req: Request, res: Response): Promise<void>
         res.status(200).json(task);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
@@ -83,18 +87,20 @@ export async function readTask(req: Request, res: Response): Promise<void>
  */
 export async function updateTask(req: Request, res: Response): Promise<void>
 {
+    console.log()
     // Récupération de l'identifiant de la tâche
     const taskId: string = req.params.taskId;
 
     // Try-catch de la modification
     try {
         // Modification de la tâche
-        await Task.findByIdAndUpdate(taskId);
+        await Task.findByIdAndUpdate(taskId, req.body);
         // Retour de la tâche
         res.status(200).json(await Task.findById(taskId));
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }
 
@@ -111,9 +117,10 @@ export async function deleteTask(req: Request, res: Response): Promise<void>
         // Suppression de la tâche
         await Task.findByIdAndDelete(taskId);
         // Retour
-        res.status(200); // TODO : retour delete
+        res.status(200);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json(error); // TODO : error
+        console.log(error);
+        res.status(500).json(error);
     }
 }

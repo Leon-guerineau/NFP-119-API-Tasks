@@ -14,7 +14,8 @@ export async function listAllUsers(req: Request, res: Response): Promise<void>
         res.status(200).json(users);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json({error: error}); // TODO : error
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 
@@ -34,7 +35,8 @@ export async function createUser(req: Request, res: Response): Promise<void>
         res.status(200).json(user);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json({error: error}); // TODO : error
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 
@@ -54,7 +56,8 @@ export async function readUser(req: Request, res: Response): Promise<void>
         res.status(200).json(user);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json({error: error}); // TODO : error
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 
@@ -74,7 +77,8 @@ export async function updateUser(req: Request, res: Response): Promise<void>
         res.status(200).json(await User.findById(userId));
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json({error: error}); // TODO : error
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 
@@ -91,9 +95,10 @@ export async function deleteUser(req: Request, res: Response): Promise<void>
         // Suppression de l'utilisateur
         await User.findByIdAndDelete(userId);
         // Retour
-        res.status(200); // TODO : retour delete
+        res.status(200);
     } catch (error) {
         // Retour de l'erreur
-        res.status(500).json({error: error}); // TODO : error
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }

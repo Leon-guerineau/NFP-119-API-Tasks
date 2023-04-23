@@ -5,7 +5,7 @@ import * as TaskHandler from './handlers/Task';
 import cors from 'cors';
 import {listUserTasks} from "./handlers/Task";
 
-const port: number = 8080; // TODO const environment
+const port: number = 8080;
 
 // Mise en place d'express
 const app: Application = express();
@@ -42,7 +42,7 @@ app.delete('/tasks/:taskId', TaskHandler.deleteTask);       // Delete
  */
 async function dbConnect(): Promise<void>
 {
-    const uri: string = 'mongodb://root:mdproot@mongo:27017/'; // TODO : const environment
+    const uri = 'mongodb+srv://guerineauleon:gQDgEQ8w4n9cFxqS@cluster0.lvugglx.mongodb.net/?retryWrites=true&w=majority'
     try {
         await connect(uri);
         console.log('mongo connecté');
