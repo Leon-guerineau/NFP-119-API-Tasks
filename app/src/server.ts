@@ -42,7 +42,7 @@ app.delete('/tasks/:taskId', TaskHandler.deleteTask);       // Delete
  */
 async function dbConnect(): Promise<void>
 {
-    const uri: String = 'mongodb+srv://guerineauleon:gQDgEQ8w4n9cFxqS@cluster0.lvugglx.mongodb.net/?retryWrites=true&w=majority'
+    const uri: string = 'mongodb+srv://guerineauleon:gQDgEQ8w4n9cFxqS@cluster0.lvugglx.mongodb.net/?retryWrites=true&w=majority'
     try {
         await connect(uri);
         console.log('mongo connecté');
