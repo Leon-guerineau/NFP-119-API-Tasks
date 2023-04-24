@@ -41,6 +41,27 @@ export async function listUserTasks(req: Request, res: Response): Promise<void>
 }
 
 /**
+ * Delete Tasks by userId
+ */
+export async function deleteUserTasks(req: Request, res: Response): Promise<void>
+{
+    // R?cup?ration de l'identifiant utilisateur
+    const userId: string = req.params.userId;
+
+    // Try-catch de la r?cup?ration des t?ches
+    try {
+        // R?cup?ration des t?ches
+        await Task.deleteMany({userId: userId});
+        // Retour
+        res.status(200).json('Tâches supprimés');
+    } catch (error) {
+        // Retour de l'erreur
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+/**
  * Create Task
  */
 export async function createTask(req: Request, res: Response): Promise<void>

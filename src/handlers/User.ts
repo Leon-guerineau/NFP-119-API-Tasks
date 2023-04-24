@@ -95,7 +95,7 @@ export async function deleteUser(req: Request, res: Response): Promise<void>
         // Suppression de l'utilisateur
         await User.findByIdAndDelete(userId);
         // Retour
-        res.status(200);
+        res.status(200).json('Utilisateur supprimé');
     } catch (error) {
         // Retour de l'erreur
         console.log(error);

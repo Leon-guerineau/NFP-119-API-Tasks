@@ -3,7 +3,6 @@ import {connect} from 'mongoose';
 import * as UserHandler from './handlers/User';
 import * as TaskHandler from './handlers/Task';
 import cors from 'cors';
-import {listUserTasks} from "./handlers/Task";
 
 const port: number = 8080;
 
@@ -31,6 +30,7 @@ app.delete('/users/:userId', UserHandler.deleteUser);   // Delete
 
 app.get('/tasks', TaskHandler.listAllTasks);                     // List all
 app.get('/users/:userId/tasks', TaskHandler.listUserTasks);      // List by userId
+app.delete('/users/:userId/tasks', TaskHandler.deleteUserTasks); // Delete by userId
 
 app.post('/tasks', TaskHandler.createTask);                 // Create
 app.get('/tasks/:taskId', TaskHandler.readTask);                 // Read
